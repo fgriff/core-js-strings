@@ -295,8 +295,8 @@ function orderAlphabetically(str) {
  *   containsSubstring('JavaScript is Fun', 'Python') => false
  *   containsSubstring('12345', '34') => true
  */
-function containsSubstring(/* str, substring */) {
-  throw new Error('Not implemented');
+function containsSubstring(str, substring) {
+  return str.includes(substring);
 }
 
 /**
@@ -313,8 +313,26 @@ function containsSubstring(/* str, substring */) {
  *   countVowels('aEiOu') => 5
  *   countVowels('XYZ') => 1
  */
-function countVowels(/* str */) {
-  throw new Error('Not implemented');
+function countVowels(str) {
+  function isVowel(letter) {
+    const vowels = ['a', 'e', 'i', 'o', 'u', 'y'];
+
+    return vowels.includes(letter.toLowerCase());
+  }
+
+  if (!str.length) {
+    return 0;
+  }
+
+  let vowelsCount = 0;
+
+  for (let i = 0; i < str.length; i += 1) {
+    if (isVowel(str[i])) {
+      vowelsCount += 1;
+    }
+  }
+
+  return vowelsCount;
 }
 
 /**
@@ -330,8 +348,22 @@ function countVowels(/* str */) {
  *   isPalindrome('apple') => false
  *   isPalindrome('No lemon, no melon') => true
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  const formattedStr = str.toLowerCase().replace(/[^a-z]/gi, '');
+
+  let leftPointer = 0;
+  let rightPointer = formattedStr.length - 1;
+
+  while (leftPointer < rightPointer) {
+    if (formattedStr[leftPointer] !== formattedStr[rightPointer]) {
+      return false;
+    }
+
+    leftPointer += 1;
+    rightPointer -= 1;
+  }
+
+  return true;
 }
 
 /**
