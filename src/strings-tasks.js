@@ -397,8 +397,20 @@ function findLongestWord(sentence) {
  *   reverseWords('Hello World') => 'olleH dlroW'
  *   reverseWords('The Quick Brown Fox') => 'ehT kciuQ nworB xoF'
  */
-function reverseWords(/* str */) {
-  throw new Error('Not implemented');
+function reverseWords(str) {
+  return str
+    .split(' ')
+    .map((word) => {
+      const { length } = word;
+      const chars = new Array(length);
+
+      for (let i = 0; i < length; i += 1) {
+        chars[i] = word[length - 1 - i];
+      }
+
+      return chars.join('');
+    })
+    .join(' ');
 }
 
 /**
