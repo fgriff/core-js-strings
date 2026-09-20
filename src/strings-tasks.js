@@ -527,8 +527,37 @@ function extractEmails(str) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const rotate = 13;
+  const upperCaseMiddle =
+    'A'.charCodeAt(0) + Math.floor(('Z'.charCodeAt(0) - 'A'.charCodeAt(0)) / 2);
+  const lowerCaseMiddle =
+    'a'.charCodeAt(0) + Math.floor(('z'.charCodeAt(0) - 'a'.charCodeAt(0)) / 2);
+  const encodedChars = new Array(str.length);
+
+  for (let i = 0; i < str.length; i += 1) {
+    const charCode = str[i].charCodeAt(0);
+
+    if (charCode < 97 || charCode > 122) {
+      encodedChars[i] = str[i];
+    }
+
+    if (charCode >= 65 && charCode <= 90) {
+      if (charCode <= upperCaseMiddle) {
+        encodedChars[i] = String.fromCodePoint(charCode + rotate);
+      } else {
+        encodedChars[i] = String.fromCodePoint(charCode - rotate);
+      }
+    } else if (charCode >= 97 && charCode <= 122) {
+      if (charCode <= lowerCaseMiddle) {
+        encodedChars[i] = String.fromCodePoint(charCode + rotate);
+      } else {
+        encodedChars[i] = String.fromCodePoint(charCode - rotate);
+      }
+    }
+  }
+
+  return encodedChars.join('');
 }
 
 /**
